@@ -3,3 +3,4 @@ plotly
 ipywidgets
 pandas
 numpy
+nbconvert
