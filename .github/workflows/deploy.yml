@@ -24,22 +24,16 @@ jobs:
           pip install voila
           pip install -r requirements.txt
 
-      - name: Generate Voila app
+      - name: Convert notebook to HTML
         run: |
-          voila skillz.ipynb --no-browser --port=8888
+          voila skillz.ipynb --no-browser --strip_sources=True --template=lab --to=html --output=dashboard.html
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add dashboard.html
+          git commit -m "Deploy Voilà dashboard"
+          git push origin +HEAD:gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-      - name: Publish to GitHub Pages
-        run: |
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf .
-          mv *.html index.html
-          git add .
-          git commit -m "Publish Voilà app"
-          git push origin gh-pages
