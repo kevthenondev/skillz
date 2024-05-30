@@ -1,4 +1,4 @@
-"voila" 
+voila
 "plotly" 
 "ipywidgets" 
 "pandas" 
