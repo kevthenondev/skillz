@@ -26,7 +26,7 @@ jobs:
 
       - name: Convert notebook to HTML
         run: |
-          voila skillz.ipynb --no-browser --strip_sources=True --template=lab --to=html --output=dashboard.html
+          jupyter nbconvert --to html skillz.ipynb --output dashboard.html
 
       - name: Deploy to GitHub Pages
         run: |
